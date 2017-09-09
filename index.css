@@ -56,58 +56,6 @@ p {
 ::webkit-selection {
   background-color: transparent; }
 
-neuron {
-  cursor: move;
-  position: absolute;
-  display: block;
-  height: 60px;
-  width: 60px;
-  -webkit-border-radius: 60px;
-  -moz-border-radius: 60px;
-  -ms-border-radius: 60px;
-  border-radius: 60px;
-  background-color: #50514F;
-  color: #5BC3EB;
-  text-align: center;
-  z-index: 10; }
-  neuron input {
-    width: 80%;
-    margin: 0 auto;
-    padding: 0;
-    border: 0;
-    margin-top: 50%;
-    -webkit-transform: translate(0, -50%);
-    -moz-transform: translate(0, -50%);
-    -ms-transform: translate(0, -50%);
-    -o-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-    background: rgba(255, 255, 255, 0.3);
-    text-align: center;
-    font-family: 'Bitter'; }
-  neuron.highlight {
-    background-color: #F06449; }
-  neuron.fire, neuron.highlight.fire {
-    background-color: #F6BD60; }
-
-arrow {
-  margin: 0;
-  height: 0;
-  width: 100px;
-  border: 1px solid #50514F;
-  display: block;
-  position: absolute; }
-  arrow:after {
-    display: block;
-    content: " ";
-    position: absolute;
-    margin-top: -5px;
-    right: -5px;
-    width: 0;
-    height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 10px solid #50514F; }
-
 .side-menu {
   height: 100%;
   width: 300px;
@@ -180,32 +128,13 @@ arrow {
     vertical-align: middle;
     margin-right: 2px; }
 
-firing-radius {
-  transition: 1s linear height, 1s linear width;
-  display: block;
-  background-color: transparent;
-  border: 1px solid rgba(91, 195, 235, 0.5);
-  height: 0px;
-  width: 0px;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  border-radius: 0px;
-  top: 0;
-  left: 0;
-  position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); }
-  firing-radius.fire {
-    height: 600px;
-    width: 600px;
-    border-width: 30px;
-    -webkit-border-radius: 600px;
-    -moz-border-radius: 600px;
-    -ms-border-radius: 600px;
-    border-radius: 600px; }
+.grid {
+  position: relative; }
+  .grid .tile {
+    position: absolute;
+    display: block;
+    border: 1px solid rgba(80, 81, 79, 0.2);
+    border-top: none;
+    border-left: none; }
 
 /*# sourceMappingURL=index.css.map */

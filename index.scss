@@ -60,60 +60,6 @@ p {
 ::moz-selection{ background-color: transparent;}
 ::webkit-selection{ background-color: transparent;}
 
-$neuron-size: 60px;
-neuron {
-    cursor: move;
-	position: absolute;
-	display: block;
-	height: $neuron-size;
-	width: $neuron-size;
-	@include border-radius($neuron-size);
-	background-color: $palette1;
-	color: $palette2;
-	text-align: center;
-    z-index: 10;
-	input {
-		width: 80%;
-		margin: 0 auto;
-		padding: 0;
-		border: 0;
-		margin-top: 50%;
-		@include transform(translate(0, -50%));
-		background: rgba(255,255,255,0.3);
-		text-align: center;
-        font-family: 'Bitter';
-	}
-    &.highlight {
-        background-color: $palette4;
-    }
-    &.fire, &.highlight.fire{
-        background-color: $palette5;
-    }
-}
-
-$tip-size: 10px;
-arrow {
-    margin: 0;
-    height: 0;
-    width: 100px;
-    border: 1px solid $palette1;
-    display: block;
-    position: absolute;
-    &:after {
-        display: block;
-        content: " ";
-        position: absolute;
-        margin-top: -$tip-size+5px;
-        right: -$tip-size+5px;
-        width: 0;
-        height: 0;
-        border-top: -5px+$tip-size solid transparent;
-        border-bottom: -5px+$tip-size solid transparent;
-
-        border-left: $tip-size solid $palette1;
-    }
-}
-
 .side-menu {
     height: 100%;
     width: 300px;
@@ -192,22 +138,13 @@ arrow {
     }
 }
 
-firing-radius {
-    transition: 1s linear height, 1s linear width;
-    display: block;
-    background-color: transparent;
-    border: 1px solid rgba($palette2, 0.5);
-    height: 0px;
-    width: 0px;
-    @include border-radius(0px);
-    top: 0;
-    left: 0;
-    position: absolute;
-    @include transform(translate(-50%, -50%));
-    &.fire {
-        height: 600px;
-        width: 600px;
-        border-width: 30px;
-        @include border-radius(600px);
-    }
+.grid {
+	position: relative;
+	.tile {
+		position: absolute;
+		display: block;
+		border: 1px solid rgba($palette1, 0.2);
+		border-top: none;
+		border-left: none;
+	}
 }
