@@ -1,0 +1,213 @@
+/*
+*
+*	Main Style File
+*
+*/
+
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+//Color Palette
+$palette1: #50514F;
+$palette2: #5BC3EB;
+$palette3: #FFFCFF;
+$palette4: #F06449;
+$palette5: #F6BD60;
+
+//Fonts
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,700);
+
+// --- Mixins --- //
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin linear-gradient($dir, $colors...) {
+	background: -webkit-linear-gradient($dir, $colors); /* Chrome 10+, Saf5.1+ */
+	background:    -moz-linear-gradient($dir, $colors); /* FF3.6+ */
+	background:     -ms-linear-gradient($dir, $colors); /* IE10 */
+	background:      -o-linear-gradient($dir, $colors); /* Opera 11.10+ */
+	background:         linear-gradient($dir, $colors); /* W3C */
+}
+@mixin transform($transform) {
+	-webkit-transform: $transform;
+	   -moz-transform: $transform;
+	    -ms-transform: $transform;
+	     -o-transform: $transform;
+		    transform: $transform;
+}
+
+//General Styles
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: $palette3;
+	overflow: hidden;
+    font-family: 'Bitter';
+}
+
+p {
+	color: $palette1;
+}
+
+//disable highlighting
+* { outline: 0; }
+::selection{ background-color: transparent;}
+::moz-selection{ background-color: transparent;}
+::webkit-selection{ background-color: transparent;}
+
+$neuron-size: 60px;
+neuron {
+    cursor: move;
+	position: absolute;
+	display: block;
+	height: $neuron-size;
+	width: $neuron-size;
+	@include border-radius($neuron-size);
+	background-color: $palette1;
+	color: $palette2;
+	text-align: center;
+    z-index: 10;
+	input {
+		width: 80%;
+		margin: 0 auto;
+		padding: 0;
+		border: 0;
+		margin-top: 50%;
+		@include transform(translate(0, -50%));
+		background: rgba(255,255,255,0.3);
+		text-align: center;
+        font-family: 'Bitter';
+	}
+    &.highlight {
+        background-color: $palette4;
+    }
+    &.fire, &.highlight.fire{
+        background-color: $palette5;
+    }
+}
+
+$tip-size: 10px;
+arrow {
+    margin: 0;
+    height: 0;
+    width: 100px;
+    border: 1px solid $palette1;
+    display: block;
+    position: absolute;
+    &:after {
+        display: block;
+        content: " ";
+        position: absolute;
+        margin-top: -$tip-size+5px;
+        right: -$tip-size+5px;
+        width: 0;
+        height: 0;
+        border-top: -5px+$tip-size solid transparent;
+        border-bottom: -5px+$tip-size solid transparent;
+
+        border-left: $tip-size solid $palette1;
+    }
+}
+
+.side-menu {
+    height: 100%;
+    width: 300px;
+    top: 0;
+    right: 0;
+    position: absolute;
+    background-color: $palette1;
+    .sequence-buttons {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+    }
+    .sequence-list {
+        input.time {
+            display: inline-block;
+            border: 0;
+            height: 22px;
+            width: 60px;
+            text-align: center;
+            left: 20px;
+            position: absolute;
+            top: 50%;
+            @include transform(translateY(-50%));
+            @include border-radius(15px);
+            background-color: darken($palette2, 20);
+            color: $palette3;
+            font-family: 'Bitter';
+            font-size: 14px;
+        }
+        li {
+            position: relative;
+            padding: 15px;
+            padding-left: 100px;
+            color: $palette3;
+            border-top: 1px solid black;
+            background-color: rgba(0,0,0,0.5);
+            height: 48px;
+            line-height: 48px;
+            text-align: left;
+            &:last-child {
+                border-bottom: 1px solid black;
+            }
+        }
+        li.text {
+            padding-left: 15px;
+            text-align: center;
+        }
+    }
+}
+
+.button {
+    cursor: pointer;
+    display: inline;
+    height: 20px;
+    padding: 3px 15px 2px;
+    border-bottom: 1px solid rgba(255,255,255,0.7);
+    background-color: $palette3;
+    border-radius: 7px;
+    margin-left: 20px;
+    &:hover {
+        background-color: $palette4;
+        border-color: darken($palette4, 20);
+    }
+    &:active {
+        background-color: darken($palette4, 10);
+        border: none;
+    }
+    &:first-child {
+        margin-left: 0;
+    }
+    i {
+        font-size: 12px;
+        vertical-align: middle;
+        margin-right: 2px;
+    }
+}
+
+firing-radius {
+    transition: 1s linear height, 1s linear width;
+    display: block;
+    background-color: transparent;
+    border: 1px solid rgba($palette2, 0.5);
+    height: 0px;
+    width: 0px;
+    @include border-radius(0px);
+    top: 0;
+    left: 0;
+    position: absolute;
+    @include transform(translate(-50%, -50%));
+    &.fire {
+        height: 600px;
+        width: 600px;
+        border-width: 30px;
+        @include border-radius(600px);
+    }
+}
