@@ -1,0 +1,24 @@
+{
+  "name": "js-mfm",
+  "version": "1.0.0",
+  "description": "A simplified version of the MFM created by Dave Ackley et al. written in Javascript and executed in your browser",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/node-sass/bin/node-sass index.scss -wo . --source-map . & node_modules/live-server/live-server.js . --ignore=\"index.scss,index.css.map\" --no-browser",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dudeofea/js-mfm.git"
+  },
+  "author": "Denis Lachance",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dudeofea/js-mfm/issues"
+  },
+  "homepage": "https://github.com/dudeofea/js-mfm#readme",
+  "dependencies": {
+    "live-server": "^1.2.0",
+    "node-sass": "^4.5.3"
+  }
+}
