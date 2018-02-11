@@ -20,6 +20,8 @@ $(window).load(function(){
 		if(i%width < width - 1)
 			tiles[i].right = tiles[i+1];
 		tiles[i].onclick = add_atom_onclick;
+		tiles[i].x = i % width;
+		tiles[i].y = Math.floor(i / width);
 	}
 	//add all atom functions to sidebar menu
 	var legend = $("#atom-legend");
@@ -38,7 +40,7 @@ $(window).load(function(){
 	}
 	selected = resource
 });
-var latency = 50;
+var latency = 10;
 var selected;
 
 //select an atom from legend
@@ -56,8 +58,9 @@ function add_atom(e, atom){
 	$(e).css('background-color', atom.color);
 	//run atom's function
 	clearTimeout(e.timeout);
-	e.atom = atom;
-	e.timeout = setTimeout(atom.run.bind(atom, e, function(){
+	e.atom = JSON.parse(JSON.stringify(atom));
+	e.atom.run = atom.run;
+	e.timeout = setTimeout(e.atom.run.bind(e.atom, e, function(){
 		add_atom(e, e.atom);
 	}), latency);
 }
@@ -132,21 +135,53 @@ var sandbox = {
 	name: "sandbox",
 	run: function(e, callback){
 		//get our index
-		if(e.left && e.left.atom.name == "sandbox" && e.left.atom.x != null){
-			this.x = e.left.atom.x + 1
-			console.log(this, e.left.atom.x + 1);
-		}else{
-			this.x = 0;
+		if(this.x == null){
+			if(e.left && e.left.atom && e.left.atom.name == "sandbox" && e.left.atom.x != null){
+				this.x = e.left.atom.x + 1
+			}else{
+				this.x = 0;
+			}
 		}
-		if(e.left && !e.left.atom){
-			add_atom(e.right, sandbox);
+		if(this.y == null){
+			if(e.top && e.top.atom && e.top.atom.name == "sandbox" && e.top.atom.y != null){
+				this.y = e.top.atom.y + 1
+			}else{
+				this.y = 0;
+			}
 		}
-		// if(this.x < width && e.right && !e.right.fn){
-		// 	add_atom(e.right, this);
-		// }
+		//if we are a horizontal member
+		if(this.x > 0 || (this.x == 0 && this.y == 0)){
+			//if we are the last horizontal member
+			if(this.x == this.width - 1){
+				//add an atom if bottom not full
+				if(e.bottom && e.bottom.atom == null){
+					add_atom(e.bottom, sandbox);
+				}
+			}else if(this.x < this.width - 1){
+				//add an atom if right not full and we haven't reached our width
+				if(e.right && e.right.atom == null){
+					add_atom(e.right, sandbox);
+				}
+			}
+		}
+		//if we are a vertical member
+		if(this.y > 0 || (this.x == 0 && this.y == 0)){
+			//if we are the last vertical member
+			if(this.y == this.height - 1){
+				//add an atom if right not full
+				if(e.right && e.right.atom == null){
+					add_atom(e.right, sandbox);
+				}
+			}else if (this.y < this.height - 1){
+				//add an atom if bottom not full and we haven't reached our height
+				if(e.bottom && e.bottom.atom == null){
+					add_atom(e.bottom, sandbox);
+				}
+			}
+		}
 		callback();
 	},
 	color: "#F06449",
-	height: 4,
+	height: 8,
 	width: 8
 }
